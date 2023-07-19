@@ -241,11 +241,16 @@ const pets = [
     }
   ];
 
-  const targetingApp = document.querySelector("#app");
+  // const targetingApp = document.querySelector("#app")
 
+  const renderToDom = (divId, html) => {
+    const targetedDiv = document.querySelector(divId)
+    targetedDiv.innerHTML = html
+  }
+  const cardsOnDom = (array) => {
   let domString = ""
 
-  for (const pet of pets) {
+  for (const pet of array) {
     domString += `
     
     <div class="card" style="width: 18rem;">
@@ -259,6 +264,79 @@ const pets = [
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>`;
+  }
+   renderToDom('#app', domString)
   };
+  
+  cardsOnDom(pets)
+  // const filterContainer = document.querySelector('#filter-container')
+  // filterContainer.addEventListener('click', (e) => {
+  //   if(e.target.id === "cats") {
+  //     const catPets = pets.filter((pet) => pet.type === "cat")
+  //     cardsOnDom(catPets);
+  //   }
+  //   if(e.target.id === "dogs") {
+  //     const dogPets = pets.filter((pet) => pet.type === "dog")
+  //     cardsOnDom(dogPets);
+  //   }   
+  //   if(e.target.id === "dinos") {
+  //     const dinoPets = pets.filter((pet) => pet.type === "dino")
+  //     cardsOnDom(dinoPets);
+  //   }    
+  //   if(e.target.id === "allPets") {
+  //     cardsOnDom(pets);
+  //   }
+  // });
+  const filterContainer = document.querySelector("#filter-container")
+  const filterPetsByType = (type) => { 
+    const filteredPets = pets.filter((pet) => pet.type === type)
+    cardsOnDom(filteredPets);
+  }
+  filterContainer.addEventListener('click', (e) => {
+    switch (e.target.id) {
+      case "cats":
+      filterPetsByType("cat");
+      break;
+      case "dogs":
+      filterPetsByType("dog");
+      break;
+      case "dinos":
+      filterPetsByType("dino");
+      break;
+      default:
+      cardsOnDom(pets);
+      break;
+    }
+  })
+// targetingApp.innerHTML = domString;
 
-targetingApp.innerHTML = domString;
+// const dogBtn = document.querySelector("#dogs");
+// dogBtn.addEventListener(('click'), () => {
+//   console.log("I clicked a button");
+// });
+
+
+// const catBtn = document.querySelector('#cats');
+// const dinoBtn = document.querySelector('#dinos');
+
+
+// catBtn.addEventListener('click',() => {
+//   console.log("CLick button");
+// })
+// dinoBtn.addEventListener('click',() => {
+//   console.log("CLick the button");
+// })
+
+
+// const petsBtn = document.querySelector('#allPets');
+
+
+// petsBtn.addEventListener('click',() => {
+//   console.log("CLick your button");
+// })
+
+// const dogButton = document.querySelector('#dogs');
+
+// dogButton.addEventListener('click',() => {
+//   console.log("CLick all buttons");
+// })
