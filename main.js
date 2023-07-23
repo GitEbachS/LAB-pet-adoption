@@ -259,9 +259,10 @@ const pets = [
       <h5 class="card-title">${pet.name}</h5>
       <p class="card-text">${pet.color}</p>
       <p class="card-text">${pet.specialSkill}</p>
-      <p class="card-text">${pet.typeOfPet}</p>
+      <p class="card-text">${pet.type}</p>
       <p class="card-text">${pet.favorite}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <a href="#" class="btn btn-primary" id="delete--${pet.id}">Delete</a>
+    
     </div>
   </div>`;
   }
@@ -340,3 +341,79 @@ const pets = [
 // dogButton.addEventListener('click',() => {
 //   console.log("CLick all buttons");
 // })
+const petForm = () => {
+  let domString = "";
+  domString +=`
+  <div class="mb-3">
+    <label for="name" class="form-label">Name: </label>
+    <input type="text" class="form-control" id="name" aria-describedby="nameHelp">
+    
+  </div>
+  <div class="mb-3">
+    <label for="imageUrl" class="form-label">Image:</label>
+    <input type="url" class="form-control" id="imageUrl"
+    aria-describedby="imageUrlHelp">
+  </div>
+  <div class="mb-3">
+    <label for="color" class="form-label">Color:</label>
+    <input type="text" class="form-control" id="color" aria-describedby="colorHelp">
+  </div>
+  <div class="mb-3">
+    <label for="specialSkills" class="form-label">Special Skill:</label>
+    <input type="text" class="form-control" id="specialSkills" 
+    aria-describedby="specialSkillHelp">
+  </div>
+  <div class="mb-3">
+    <label for="type" class="form-label">Type:</label>
+    <input type="text" class="form-control" id="type" aria-describedby="typeHelp">
+  </div>
+  <div class="mb-3 favorite">
+    <input type="checkbox" class="form-check-input" id="favorite">
+    <label class="form-check-label" for="favorite">Favorite:</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  `
+  renderToDom("#form-container", domString)
+}
+
+
+
+const form = document.querySelector("form");
+const createPet = (e) => {
+  e.preventDefault()
+
+  const petObj = {
+    id: pets.length + 1,
+    name: document.querySelector("#name").value,
+    image: document.querySelector("#imageUrl").value,
+    color: document.querySelector("#color").value,
+    specialSkill: document.querySelector("#specialSkills").value,
+    Type: document.querySelector("#type").value,
+    favorite: document.querySelector("#favorite").value.checked
+  }
+  pets.push(petObj)
+  cardsOnDom(pets)
+  form.reset()
+}
+
+form.addEventListener("submit", createPet)
+
+const formButton = document.querySelector("#show-form-button")
+formButton.addEventListener("click", (e) => {
+  petForm()
+})
+
+
+const app = document.querySelector('#app');
+
+app.addEventListener('click', (e) => {
+  if (e.target.id.includes("delete")) {
+    const [, id] = e.target.id.split("--");
+    const index = pets.findIndex(e => e.id === Number(id));
+    pets.splice(index, 1);
+    cardsOnDom(pets);
+  }
+})
+
+
+startApp();
