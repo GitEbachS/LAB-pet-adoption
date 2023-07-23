@@ -385,10 +385,10 @@ const createPet = (e) => {
   const petObj = {
     id: pets.length + 1,
     name: document.querySelector("#name").value,
-    image: document.querySelector("#imageUrl").value,
+    imageUrl: document.querySelector("#imageUrl").value,
     color: document.querySelector("#color").value,
-    specialSkill: document.querySelector("#specialSkills").value,
-    Type: document.querySelector("#type").value,
+    specialSkill: document.querySelector("#specialSkill").value,
+    type: document.querySelector("#type").value,
     favorite: document.querySelector("#favorite").value.checked
   }
   pets.push(petObj)
