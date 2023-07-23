@@ -359,8 +359,8 @@ const petForm = () => {
     <input type="text" class="form-control" id="color" aria-describedby="colorHelp">
   </div>
   <div class="mb-3">
-    <label for="specialSkills" class="form-label">Special Skill:</label>
-    <input type="text" class="form-control" id="specialSkills" 
+    <label for="specialSkill" class="form-label">Special Skill:</label>
+    <input type="text" class="form-control" id="specialSkill" 
     aria-describedby="specialSkillHelp">
   </div>
   <div class="mb-3">
